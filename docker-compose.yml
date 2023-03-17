@@ -1,0 +1,25 @@
+version: '3'
+services:
+  django-webrtc:
+    build: ./
+    command: >
+      sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    # command: >
+    #   sh -c "python3.10 manage.py migrate && daphne config.asgi:application"
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 8000:8000
+#    env_file:
+#      - ./.env.dev
+
+  # webrtc-redis-server:
+  #   image: "redis:5"
+  #   ports:
+  #     - 6379:6379
+
+  webrtc-redis-server:
+    image: "redis:alpine"
+
+    ports:
+      - 6379:6379
